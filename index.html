@@ -117,6 +117,18 @@
             color: #000;
             box-shadow: 0 0 15px 4px rgba(0, 191, 255, 0.8);
         }
+        /* Pembe Buton Stili - Yarı Saydam */
+.btn-pink {
+    color: #ff69b4;
+    box-shadow: 0 0 10px 2px rgba(255, 105, 180, 0.5);
+    background-color: rgba(255, 105, 180, 0.1); /* Yarı transparan pembe arka plan */
+}
+
+.btn-pink:hover {
+    background-color: rgba(255, 105, 180, 0.3); /* Hover durumunda daha belirgin bir transparan */
+    color: #000;
+    box-shadow: 0 0 15px 4px rgba(255, 105, 180, 0.8);
+}
 
         /* Like Butonu */
         .like-button {
@@ -252,7 +264,7 @@
 
 <!-- Copy Script Butonu -->
 <div class="button-container">
-    <button class="btn btn-green" onclick="copyScript()">loadstring(game:HttpGet('https://raw.githubusercontent.com/perfectusmim1/Hub/refs/heads/main/Key'))()</button>
+    <button class="btn btn-pink" onclick="copyScript()">loadstring(game:HttpGet('https://raw.githubusercontent.com/perfectusmim1/Hub/refs/heads/main/Key'))()</button>
 </div>
 
         <!-- Get Key Butonları ve Like Butonları -->
@@ -298,11 +310,11 @@
         function copyScript() {
             const scriptText = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/perfectusmim1/Hub/refs/heads/main/Key"))()';
             navigator.clipboard.writeText(scriptText).then(() => {
-                const button = document.querySelector('.btn-green');
+                const button = document.querySelector('.btn-pink');
                 button.textContent = 'Script Copied';
                 button.style.boxShadow = '0 0 25px rgba(0, 224, 237, 1), 0 0 50px rgba(0, 218, 114, 1)';
                 setTimeout(() => {
-                    button.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.5)';
+                    button.style.boxShadow = '0 0 10px rgba(255, 105, 180, 0.5)';
                     button.textContent = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/perfectusmim1/Hub/refs/heads/main/Key"))()';
                 }, 1000);
             }).catch(err => console.error('Script kopyalama başarısız:', err));

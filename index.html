@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Arayüz</title>
+    <style>
+        /* Genel Sayfa ve Giriş Ekranı Stili */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://i.imgur.com/xc2O6Qz.jpeg') no-repeat center center fixed; /* Arka plan resmi */
+            background-size: cover; /* Tüm ekranı kaplasın */
+            color: #fff;
+            overflow: hidden;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(10px); /* Bulanıklık efekti */
+            z-index: -1; /* İçeriğin arka planında kalması için */
+        }
+
+        /* İçerik Bölümü */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1em;
+            z-index: 1; /* İçeriklerin bulanık arka plandan önde görünmesi için */
+        }
+
+        /* Başlık Stili */
+        .title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 1em;
+        }
+
+        .button-wrapper {
+            display: flex;
+            gap: 3em;
+            margin-top: 1.5em;
+        }
+
+        /* Görsel Stili */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1em;
+        }
+        .button-container img {
+            width: 128px;
+            height: 128px;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .button-container img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px 4px rgba(0, 255, 0, 0.8);
+        }
+        .button-container.first img {
+            box-shadow: 0 0 10px 3px rgba(0, 255, 0, 0.5);
+        }
+        .button-container.second img {
+            box-shadow: 0 0 10px 3px rgba(0, 191, 255, 0.5);
+        }
+
+        /* Buton Stili */
+        .btn {
+            padding: 0.8em 1.5em;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: inherit;
+            border: 2px solid currentColor;
+            outline: none;
+        }
+        .btn-green {
+            color: #00ff00;
+            box-shadow: 0 0 10px 2px rgba(0, 255, 0, 0.5);
+        }
+        .btn-blue {
+            color: #00bfff;
+            box-shadow: 0 0 10px 2px rgba(0, 191, 255, 0.5);
+        }
+        .btn-green:hover {
+            background-color: #00ff00;
+            color: #000;
+            box-shadow: 0 0 15px 4px rgba(0, 255, 0, 0.8);
+        }
+        .btn-blue:hover {
+            background-color: #00bfff;
+            color: #000;
+            box-shadow: 0 0 15px 4px rgba(0, 191, 255, 0.8);
+            outline: none;
+        }
+
+        /* Like Butonu */
+        .like-button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            height: 48px;
+            width: 150px;
+            border-radius: 16px;
+            border: 2px solid;
+            background-color: #1d1d1d;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+            outline: none;
+        }
+        .like-button.first {
+            border-color: #00ff00;
+        }
+        .like-button.second {
+            border-color: #00bfff;
+        }
+        .like-button:hover {
+            box-shadow: 0 0 10px 4px rgba(0, 255, 0, 0.8);
+        }
+        .button-container.second .like-button:hover {
+            box-shadow: 0 0 10px 4px rgba(0, 191, 255, 0.8);
+        }
+        .like {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+        }
+        .like-icon {
+            height: 28px;
+            width: 28px;
+            transition: fill 0.3s ease;
+        }
+        .first .like-icon {
+            fill: #00ff00;
+        }
+        .second .like-icon {
+            fill: #00bfff;
+        }
+        .like-count {
+            color: inherit; /* Butonun rengiyle aynı */
+            font-size: 16px;
+            transition: all 0.5s ease-out;
+        }
+        .like-count.grow {
+            animation: countGrow 0.3s ease-out;
+        }
+        @keyframes countGrow {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .like-button.clicked .like-icon {
+            animation: heartGrow 0.2s ease-out;
+        }
+        @keyframes heartGrow {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* Sol Alt Discord Butonu Stili */
+        .discord-button-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1;
+        }
+        .discord-button {
+    border-radius: 50%; /* Yuvarlak yapar */
+    width: 60px; /* Sabit genişlik */
+    height: 60px; /* Sabit yükseklik */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7289da;
+    color: white;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s, background-color 0.5s;
+}
+        .discord-button:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(to top, #331029, #310413);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sayfa İçeriği -->
+    <div class="content" id="content">
+        <!-- PERFECTUS HUB Başlık -->
+        <div class="title">PERFECTUS HUB</div>
+
+        <!-- Copy Script Butonu -->
+        <div class="button-container">
+            <button class="btn btn-green" onclick="copyScript()">Copy Script</button>
+        </div>
+
+        <!-- Get Key Butonları ve Like Butonları -->
+        <div class="button-wrapper">
+            <!-- İlk Buton ve Like Butonu -->
+            <div class="button-container first">
+                <img src="file:///C:/Users/cagan/Desktop/website/image/keyguard.png" alt="Keyguard">
+                <a href="https://keyguardian.org/a/312" target="_blank" rel="noopener noreferrer" class="btn btn-green">Get Key</a>
+            </div>
+
+            <!-- İkinci Buton ve Like Butonu -->
+            <div class="button-container second">
+                <img src="file:///C:/Users/cagan/Desktop/website/image/panda.png" alt="Panda">
+                <a href="https://pandadevelopment.net/startkey.html?service=perfectushub" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Get Key</a>
+            </div>
+        </div>
+    </div>
+
+<!-- Discord Butonu Sol Alt -->
+<div class="discord-button-container">
+    <a href="https://discord.gg/RVnjYRWNA9" target="_blank" class="discord-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 640 512" stroke-width="0" fill="currentColor" stroke="currentColor">
+            <path d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"></path>
+        </svg>
+    </a>
+</div>
+
+    <script>
+        // Like Butonu Tıklama İşlevi
+        function increaseCount(buttonId) {
+            const likeButton = document.querySelector(`.button-container:nth-child(${buttonId}) .like-button`);
+            const countElement = document.getElementById(`like-count-${buttonId}`);
+            if (!likeButton.classList.contains("clicked")) {
+                let currentCount = parseInt(countElement.textContent);
+                countElement.textContent = currentCount + 1;
+                likeButton.classList.add("clicked");
+                countElement.classList.add("grow");
+                setTimeout(() => countElement.classList.remove("grow"), 300);
+            }
+        }
+
+        // Script Kopyalama İşlevi
+        function copyScript() {
+            const scriptText = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/perfectusmim1/Hub/refs/heads/main/Key"))()';
+            navigator.clipboard.writeText(scriptText).then(() => {
+                const button = document.querySelector('.btn-green');
+                button.textContent = 'Script Copied';
+                button.style.boxShadow = '0 0 25px rgba(0, 224, 237, 1), 0 0 50px rgba(0, 218, 114, 1)';
+                setTimeout(() => {
+                    button.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.5)';
+                    button.textContent = 'Copy Script';
+                }, 1000);
+            }).catch(err => console.error('Script kopyalama başarısız:', err));
+        }
+    </script>
+</body>
+</html>

@@ -194,7 +194,21 @@ white_on_trans.ico" type="image/x-icon">
             50% { transform: scale(1.3); }
             100% { transform: scale(1); }
         }
+        /* Like Buton Sayacı Renkleri */
+        .like-count {
+            font-size: 16px;
+            transition: all 0.5s ease-out;
+        }
 
+        /* Birinci like sayısının rengi - Yeşil */
+        #like-count-1 {
+            color: #00ff00; /* Yeşil */
+        }
+
+        /* İkinci like sayısının rengi - Mavi */
+        #like-count-2 {
+            color: #00bfff; /* Mavi */
+        }
         /* Sol Alt Discord Butonu Stili */
         .discord-button-container {
             position: fixed;
@@ -302,18 +316,38 @@ white_on_trans.ico" type="image/x-icon">
 </div>
 
     <script>
-        // Like Butonu Tıklama İşlevi
         function increaseCount(buttonId) {
             const likeButton = document.querySelector(`.button-container:nth-child(${buttonId}) .like-button`);
             const countElement = document.getElementById(`like-count-${buttonId}`);
+            
+            // Mevcut sayıyı al veya 0 olarak başlat
+            let currentCount = parseInt(localStorage.getItem(`like-count-${buttonId}`)) || 0;
+            
+            // Tıklamayı yalnızca "clicked" değilse yap
             if (!likeButton.classList.contains("clicked")) {
-                let currentCount = parseInt(countElement.textContent);
-                countElement.textContent = currentCount + 1;
+                currentCount += 1;
+                countElement.textContent = currentCount;
+                
+                // LocalStorage'de kaydet
+                localStorage.setItem(`like-count-${buttonId}`, currentCount);
+                
                 likeButton.classList.add("clicked");
                 countElement.classList.add("grow");
                 setTimeout(() => countElement.classList.remove("grow"), 300);
             }
         }
+
+        // Sayfa Yüklendiğinde Like Sayılarını Geri Yükle
+        function loadLikes() {
+            const likeCount1 = localStorage.getItem("like-count-1") || 0;
+            const likeCount2 = localStorage.getItem("like-count-2") || 0;
+            
+            document.getElementById("like-count-1").textContent = likeCount1;
+            document.getElementById("like-count-2").textContent = likeCount2;
+        }
+
+        // Sayfa yüklendiğinde "like" sayacı yüklenir
+        window.onload = loadLikes;
 
         // Script Kopyalama İşlevi
         function copyScript() {

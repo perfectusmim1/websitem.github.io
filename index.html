@@ -265,21 +265,32 @@ white_on_trans.ico" type="image/x-icon">
     <button class="btn btn-pink" onclick="copyScript()">loadstring(game:HttpGet('https://raw.githubusercontent.com/perfectusmim1/Hub/refs/heads/main/Key'))()</button>
 </div>
 
-        <!-- Get Key Butonları ve Like Butonları -->
-        <div class="button-wrapper">
-            <!-- İlk Buton ve Like Butonu -->
-            <div class="button-container first">
-                <img src="image/keyguard.png" alt="Keyguard">
-                <a href="https://keyguardian.org/a/312" target="_blank" rel="noopener noreferrer" class="btn btn-green">Get Key</a>
-            </div>
-
-            <!-- İkinci Buton ve Like Butonu -->
-            <div class="button-container second">
-                <img src="image/panda.png" alt="Panda">
-                <a href="https://pandadevelopment.net/startkey.html?service=perfectushub" target="_blank" rel="noopener noreferrer" class="btn btn-blue">Get Key</a>
-            </div>
+<div class="button-wrapper">
+    <!-- İlk Buton ve Like Butonu -->
+    <div class="button-container first">
+        <img src="image/keyguard.png" alt="Keyguard">
+        <a href="https://keyguardian.org/a/312" class="btn btn-green">Get Key</a>
+        <div class="like-button first" onclick="increaseCount(1)">
+            <svg class="like-icon" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+            </svg>
+            <span class="like-count" id="like-count-1">0</span>
         </div>
     </div>
+
+    <!-- İkinci Buton ve Like Butonu -->
+    <div class="button-container second">
+        <img src="image/panda.png" alt="Panda">
+        <a href="https://pandadevelopment.net/startkey.html?service=perfectushub" class="btn btn-blue">Get Key</a>
+        <div class="like-button second" onclick="increaseCount(2)">
+            <svg class="like-icon" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+            </svg>
+            <span class="like-count" id="like-count-2">0</span>
+        </div>
+    </div>
+</div>
+
 
 <!-- Discord Butonu Sol Alt -->
 <div class="discord-button-container">

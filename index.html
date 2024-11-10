@@ -214,12 +214,10 @@
         <!-- PERFECTUS HUB Başlık -->
         <div class="title">PERFECTUS HUB</div>
 
-        <!-- Copy Script Butonu -->
 <!-- Copy Script Butonu -->
 <div class="button-container">
     <button class="btn btn-green" onclick="copyScript()">loadstring(game:HttpGet('https://raw.githubusercontent.com/perfectusmim1/Hub/refs/heads/main/Key'))()</button>
 </div>
-
 
         <!-- Get Key Butonları ve Like Butonları -->
         <div class="button-wrapper">
@@ -269,7 +267,7 @@
                 button.style.boxShadow = '0 0 25px rgba(0, 224, 237, 1), 0 0 50px rgba(0, 218, 114, 1)';
                 setTimeout(() => {
                     button.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.5)';
-                    button.textContent = 'Copy Script';
+                    button.textContent = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/perfectusmim1/Hub/refs/heads/main/Key"))()';
                 }, 1000);
             }).catch(err => console.error('Script kopyalama başarısız:', err));
         }
